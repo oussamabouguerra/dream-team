@@ -6,16 +6,17 @@ window.location="login.html";
 
 
 
-function Logout()
-{
-	window.location="accueil1.html";
-	}
+function Logout(){
+
+window.location="accueil.html";
+
+}
 
 
 
 
 function nouveau_compte(){
 
-window.location="ajouterpromotion.html";
+window.location="ajouter_client.html";
 
 }

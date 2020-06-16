@@ -1,5 +1,5 @@
 <?php
-include "../core/promotionC.php";
+include "produitC.php";
 
 
 
@@ -21,7 +21,7 @@ $req = $db->query("SELECT count(*) as s FROM client WHERE id='$id' and mdp='$mdp
 </head>
 <body>
 
-<form class="box" action="accueil.html" method="post" name="login">
+<form class="box" action="accueil1.html" method="post" name="login">
 <h1 class="box-logo box-title">Labasni.tn</h1>
 <h3 align="center">ESPACE FOURNISSEUR</h3>
 <input type="submit" value="Entrer " name="submit" class="box-button">
@@ -74,7 +74,7 @@ else if($req->fetch()['s'] > 0 )
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#accueil">Promotions</a>
+            <a class="nav-link js-scroll-trigger" href="#accueil">Produit</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#connexion">Déconnexion</a>
@@ -99,9 +99,9 @@ else if($req->fetch()['s'] > 0 )
   <section class="page-section" id="accueil">
     <div class="row">
         <div class="col-lg-12 text-center">
-          <h1 class="section-heading text-uppercase"><p style="color:green;">Nos Promotions</p></h1>
-            <?php $promotionC=new promotionC();
-          $list=$promotionC->afficherpromotion(); ?>
+          <h1 class="section-heading text-uppercase"><p style="color:green;">Nos Produit</p></h1>
+            <?php $produitC=new produitC();
+          $list=$produitC->afficherproduit(); ?>
 
         <table border="1"  align="center"  >
 <style>
@@ -137,8 +137,7 @@ body {
 </head>
               
 
-<section class="lattest-product-area pb-40 category-list">
-            <div class="row">
+
                         <?PHP
                      
                         foreach($list as $row){
@@ -149,26 +148,19 @@ body {
     
  <h3><p style="color:blue;"><mark><?PHP echo $row['nom']; ?></mark></p></h3>
   </div>
-  <img src="imageproduit/<?PHP echo $row['photo']; ?>" alt="" style="width:100%;">
-  <div class="container" style="background-color: #ffcccc">
-    <h2><h1><p style="color:#808000;"><?PHP echo $row['pourcentage']; echo "%";?></p></</h2> 
-    <p style="color:black;"><?PHP echo $row['description']; ?></p>
-  </div>
+  <img src="image/<?PHP echo $row['photo']; ?>" alt="" style="width:100%;">
+  
     <div class="container"> 
-<p style="color:#000080;"><del><?PHP echo"Prix  :"; echo $row['prix']; echo "DT"; ?></del><ins><?PHP  echo $row['prixpromo']; echo "DT"; ?>
+<p style="color:#000080;"><?PHP echo"Prix  :"; echo $row['prix']; echo "DT"; ?><ins><?PHP  ?>
 </ins>!
   </div>
-  <div class="container"> 
-    <p class="expire">Expire:<p style="color:red;"><?PHP echo $row['date_fin']; ?></p></p>
-  </div>
+  
 </div>
-           </p>
-           </div>
-           </h1></h2></div></div></div></section> 
-
+            
                         <?PHP
                         }
                         ?>
+
                         <script>
 function openCity(cityName) {
   var i;
@@ -222,7 +214,7 @@ function openCity(cityName) {
     <CENTER>
 <FORM name=login>
 <TABLE width=225 border=1 cellpadding=3>
-<tr><td colspan=2 align=center><input class="btn btn-primary btn-xl text-uppercase" type=button value="Se déconnecter" onClick="Logout()"></td>
+<tr><td colspan=2 align=center><input class="btn btn-primary btn-xl text-uppercase" type=button value="Se deconnecter" onClick="Login()"></td>
 </tr>
 </TABLE>
 </FORM>
@@ -483,7 +475,7 @@ function openCity(cityName) {
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Contact form JavaScript -->
-  <script src="views/connexion.js"></script>
+  <script src="connexion.js"></script>
 
 
   <!-- Custom scripts for this template -->

@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?PHP
+include "produitC.php";
+$produitC1=new produitC();
+$list=$produitC1->afficherproduit();
+
+//var_dump($listeEmployes->fetchAll());
+?>
+
+
 <html lang="en">
 	<style>
 /* width */
@@ -28,7 +36,7 @@
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Gestion Article</title>
+		<title>Labasni-Admin-Articles</title>
 
 		<!--Favicon -->
 		<link rel="icon" href="favicon.html" type="image/x-icon"/>
@@ -85,30 +93,30 @@
                 <div class="app-sidebar__user">
                     <div class="dropdown user-pro-body text-center">
                         <div class="nav-link pl-1 pr-1 leading-none ">
-                            <img src="assets/img/avatar.jpg" alt="user-img" class="avatar-xl rounded-circle mb-1">
+                            <img src="assets/img/as.png" alt="user-img" class="avatar-xl rounded-circle mb-1">
                             <span class="pulse bg-success" aria-hidden="true"></span>
                         </div>
                         <div class="user-info">
-                            <h6 class=" mb-1 text-dark">Fournisseur</h6>
+                            <h6 class=" mb-1 text-dark">Admin</h6>
                         </div>
                     </div>
                 </div>
 
-<li class="slide">
-
- <a class="side-menu__item"  data-toggle="slide" href="principal.php"><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Menu</span></a>
-<a href="afficherproduit.php"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Afficher produits</span></a>
-<a href="ajouterproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Ajouter produit</span></a>
-<a href="supprimerproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Supprimer produit</span></a>
-<a href="modifierproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Modifier produit</span></a>
-<a href="accueil1.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Quitter</span></a><ul class="slide-menu">
-
-</ul>					
+                
+					
                     
-
-
-</ul>
-</li>
+<li class="slide">
+							<a class="side-menu__item"  data-toggle="slide" href="principal.php"><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Article</span></a>
+							<a href="ajouterproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Ajouter produit</span></a>
+							<a href="supprimerproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Supprimer produit</span></a>
+							<a href="modifierproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Modifier produit</span></a>
+							<a href="accueil1.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Quitter</span></a>
+									
+							<ul class="slide-menu">
+								
+							</ul>
+						</li>
+                </ul>
             </aside>
 				<!--aside closed-->
 
@@ -118,16 +126,71 @@
 
                         <!--page-header open-->
 						<div class="page-header">
-							<h4 class="page-title">Gestion d'articles</h4>
+							<h4 class="page-title">Articles</h4>
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#" class="text-light-color">Fournisseur</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Gestion Article</li>
+								<li class="breadcrumb-item"><a href="#" class="text-light-color">Article</a></li>
+								<li class="breadcrumb-item active" aria-current="page">affichage des  articles</li>
 							</ol>
 						</div>
-						<!--page-header closed-->
-
+						<!--page-header closed--><div class="topnav">
+<div class="search-container">
+    <form method="POST" action="search.php">
+      <input type="text" placeholder="Search.." name="referance">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</div>
+<div style="padding-left:16px">
+</div>
                         <!--row open-->
-							<div style="text-align:center;padding:1em 0;"> <h2><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/fr/city/2464470"><span style="color:gray;">Heure actuelle</span><br />Tunis, Tunisie</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=fr&size=large&timezone=Africa%2FTunis&show=hour_minute" width="100%" height="140" frameborder="0" seamless></iframe> </div>
+							<div class="row">
+							<table border="1">
+<tr>
+<td>referance</td>
+<td>nom</td>
+<td>prix</td>
+<td>quantite</td>
+<td>mesure</td>
+<td>couleur</td>
+<td>marque</td>
+<td>photo</td>
+
+
+</tr>
+
+<?PHP
+foreach($list as $row){
+	?>
+	<tr>
+	<td><?PHP echo $row['referance']; ?></td>
+	<td><?PHP echo $row['nom']; ?></td>
+	<td><?PHP echo $row['prix']; ?></td>
+	<td><?PHP echo $row['quantite']; ?></td>
+	<td><?PHP echo $row['mesure']; ?></td>
+	<td><?PHP echo $row['couleur']; ?></td>
+	<td><?PHP echo $row['marque']; ?></td>
+	 <td><img src="image/<?PHP echo $row['photo']; ?>" alt=""></td>	</tr>
+	 <td><form method="POST" action="supprimerPro.php">
+	<input type="submit" name="supprimer" class="btn btn-primary mt-1 mb-0" value="supprimer">
+	<input type="hidden" value="<?PHP echo $row['referance']; ?>" name="referance">
+	</form>
+	</td>
+	 <td> <a href="modifierpro.php?referance=<?php echo $row ['referance'];?>"><button type="submit" class="btn btn-primary mt-1 mb-0">modifier</button></a>
+	 </td>
+	
+	
+	</tr>
+	<?PHP
+}
+?>
+
+</table>
+<td><a href="trierpromotion2.php?id=<?PHP echo $row['referance']; ?>"><button type="submit" class="btn btn-primary mt-1 mb-0" >Trie Desc</button></a></td><td>
+<a href="trierpromotion.php?id=<?PHP echo $row['referance']; ?>"><button type="submit" class="btn btn-primary mt-1 mb-0" >Trie Asc</button></a></td>
+
+
+<form method</form>
+							</div>
 						<!--row closed-->
 						
 

@@ -1,4 +1,99 @@
-<!DOCTYPE html>
+<?php
+class produit
+{
+	protected $reference;
+	protected $nom;
+	protected $prix;
+	protected $quantite;
+	protected $mesure;
+	protected $couleur;
+	protected $marque;
+	protected $photo;
+	
+	
+	function __construct($reference,$nom,$prix,$quantite,$mesure,$couleur,$marque,$photo)
+	    {
+		$this->reference=$reference;
+		$this->nom=$nom;
+		$this->prix=$prix;
+		$this->quantite=$quantite;
+		$this->mesure=$mesure;
+		$this->couleur=$couleur;
+		$this->marque=$marque;
+		$this->photo=$photo;
+		
+      	}
+	function getreference(){
+		return $this->reference;
+	}
+	function getnom(){
+		return $this->nom;
+	}
+	function getprix(){
+		return $this->prix;
+	}
+	function getquantite(){
+		return $this->quantite;
+	}
+
+	function getmesure(){
+		return $this->mesure;
+	}
+
+	function getcouleur(){
+		return $this->couleur;
+	}
+	function getmarque(){
+		return $this->marque;
+	}
+	function getphoto(){
+		return $this->photo;
+	}
+	function setreferance($reference){
+		$this->reference=$reference;
+	}
+	function setnom($nom){
+		$this->nom=$nom;
+	}
+	function setprix($prix){
+		$this->prix=$prix;
+	}
+	function setquantite($quantite){
+		$this->quantite=$quantite;
+	}
+
+	function setmesure($mesure){
+		$this->mesure=$mesure;
+	}
+	function setcouleur($couleur){
+		$this->couleur=$couleur;
+	}
+	function setmarque($marque){
+		$this->marque=$marque;
+	}
+	function setphoto($photo){
+		$this->photo=$photo;
+	}
+
+}
+include "produitC.php";
+
+if(isset($_POST['referance']) && isset($_POST['prix']))
+{
+$produitC1=new produitC();
+$produitC1->modifierproduit($_POST['referance'],$_POST['prix']);
+header ("Location:afficherproduit.php");
+
+
+//$produitC1->afficherproduit();
+}
+else
+{
+	echo "verify";
+}
+?>
+
+
 <html lang="en">
 	<style>
 /* width */
@@ -28,7 +123,7 @@
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Gestion Article</title>
+		<title>Labasni-Admin-Articles</title>
 
 		<!--Favicon -->
 		<link rel="icon" href="favicon.html" type="image/x-icon"/>
@@ -85,30 +180,25 @@
                 <div class="app-sidebar__user">
                     <div class="dropdown user-pro-body text-center">
                         <div class="nav-link pl-1 pr-1 leading-none ">
-                            <img src="assets/img/avatar.jpg" alt="user-img" class="avatar-xl rounded-circle mb-1">
+                            <img src="assets/img/as.png" alt="user-img" class="avatar-xl rounded-circle mb-1">
                             <span class="pulse bg-success" aria-hidden="true"></span>
                         </div>
                         <div class="user-info">
-                            <h6 class=" mb-1 text-dark">Fournisseur</h6>
+                            <h6 class=" mb-1 text-dark">Admin</h6>
                         </div>
                     </div>
                 </div>
 
-<li class="slide">
-
- <a class="side-menu__item"  data-toggle="slide" href="principal.php"><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Menu</span></a>
-<a href="afficherproduit.php"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Afficher produits</span></a>
-<a href="ajouterproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Ajouter produit</span></a>
-<a href="supprimerproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Supprimer produit</span></a>
-<a href="modifierproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Modifier produit</span></a>
-<a href="accueil1.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Quitter</span></a><ul class="slide-menu">
-
-</ul>					
+                
+					
                     
-
-
-</ul>
-</li>
+<li class="slide">
+							<a class="side-menu__item"  data-toggle="slide" href="principal.php"><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Article</span></a>
+							<ul class="slide-menu">
+								
+							</ul>
+						</li>
+                </ul>
             </aside>
 				<!--aside closed-->
 
@@ -118,18 +208,21 @@
 
                         <!--page-header open-->
 						<div class="page-header">
-							<h4 class="page-title">Gestion d'articles</h4>
+							<h4 class="page-title">Articles</h4>
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#" class="text-light-color">Fournisseur</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Gestion Article</li>
+								<li class="breadcrumb-item"><a href="#" class="text-light-color">Article</a></li>
+								<li class="breadcrumb-item active" aria-current="page">supprimer un article</li>
 							</ol>
 						</div>
 						<!--page-header closed-->
 
                         <!--row open-->
-							<div style="text-align:center;padding:1em 0;"> <h2><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/fr/city/2464470"><span style="color:gray;">Heure actuelle</span><br />Tunis, Tunisie</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=fr&size=large&timezone=Africa%2FTunis&show=hour_minute" width="100%" height="140" frameborder="0" seamless></iframe> </div>
+							<div class="row">
+							 <a href="afficherarticle.php">Consulter les articles</a></br></br>
+							 
+							</div>
 						<!--row closed-->
-						
+						<a href="produit.html">Menu</a><br><br>
 
 			</div>
 		</div>

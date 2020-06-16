@@ -1,16 +1,9 @@
 <?php 
-include "../core/promotionC.php";
-$promotionC1=new promotionC();
- if ($list=$promotionC1->existencepromotion(@$_POST['id'])!=1)
-		{
-		?>
-		<script type="text/javascript">
-        alert ("Id n'existe pas");</script>
-    	<?php 
-    	echo "<META http-equiv='refresh' content='0;URL=afficherpromotion.php'>";
-		}
-	else{	$list=$promotionC1->searchsupplier($_POST['id']);
-}
+include "produitC.php";
+$produitC1=new produitC();
+ 
+	$list=$produitC1->searchsupplier($_POST['referance']);
+
 //var_dump($listeEmployes->fetchAll());
 ?>
 
@@ -45,7 +38,7 @@ $promotionC1=new promotionC();
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Labasni-Admin-Promotions</title>
+		<title>Labasni-Admin-Articles</title>
 
 		<!--Favicon -->
 		<link rel="icon" href="favicon.html" type="image/x-icon"/>
@@ -117,7 +110,12 @@ $promotionC1=new promotionC();
 					
                     
 <li class="slide">
-							<a class="side-menu__item"  data-toggle="slide" href="principal.php"><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Promotion</span></a>
+							<a class="side-menu__item"  data-toggle="slide" href="principal.php"><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Articles</span></a>
+							<a href="ajouterproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Ajouter produit</span></a>
+							<a href="afficherproduit.php"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Afficher produits</span></a>
+							<a href="supprimerproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Supprimer produit</span></a>
+							<a href="modifierproduit.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Modifier produit</span></a>
+							<a href="accueil1.html"  class="side-menu__item" ><i class="side-menu__icon fa fa-laptop"></i><span class="side-menu__label">Quitter</span></a>
 							<ul class="slide-menu">
 								
 							</ul>
@@ -132,17 +130,17 @@ $promotionC1=new promotionC();
 
                         <!--page-header open-->
 						<div class="page-header">
-							<h4 class="page-title">Promotion</h4>
+							<h4 class="page-title">Article</h4>
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#" class="text-light-color">Promotion</a></li>
-								<li class="breadcrumb-item active" aria-current="page">affichage des  Promotions</li>
+								<li class="breadcrumb-item"><a href="#" class="text-light-color">Article</a></li>
+								<li class="breadcrumb-item active" aria-current="page">affichage des  Articles</li>
 							</ol>
 						</div>
 						<!--page-header closed-->
                         <!--row open--><div class="topnav">
   <div class="search-container">
     <form method="POST" action="search.php">
-      <input type="text" placeholder="Search.." name="id">
+      <input type="text" placeholder="Search.." name="referance">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
@@ -158,14 +156,13 @@ $promotionC1=new promotionC();
 <td><input class="btn btn-primary btn-xl text-uppercase" type=button align="center" value="PDF" onClick="window.print()"></td>
 
 <tr>
-<td>id</td>
+<td>referance</td>
 <td>nom</td>
 <td>prix</td>
-<td>pourcentage</td>
-<td>prixpromo</td>
-<td>description</td>
-<td>date_debut</td>
-<td>date_fin</td>
+<td>quantite</td>
+<td>mesure</td>
+<td>couleur</td>
+<td>marque</td>
 <td>photo</td>
 </tr>
 <?PHP
@@ -175,23 +172,23 @@ foreach($list as $row){
 	?>
 
 	<tr>
-	<td><?PHP echo $row['id']; ?></td>
+	<td><?PHP echo $row['referance']; ?></td>
 	<td><?PHP echo $row['nom']; ?></td>
 	<td><?PHP echo $row['prix']; echo "DT"; ?></td>
-	<td><?PHP echo $row['pourcentage']; echo "%";?></td>
-	<td><?PHP echo $row['prixpromo']; echo "DT";?></td>
-	<td><?PHP echo $row['description']; ?></td>
-	<td><?PHP echo $row['date_debut']; ?></td>
-	<td><?PHP echo $row['date_fin']; ?></td>
-   <td><img src="imageproduit/<?PHP echo $row['photo']; ?>" alt=""></td>	</tr>
-<td><form method="POST" action="supprimerPromo.php">
+	<td><?PHP echo $row['quantite'];?></td>
+	<td><?PHP echo $row['mesure']; ?></td>
+	<td><?PHP echo $row['couleur']; ?></td>
+	<td><?PHP echo $row['marque']; ?></td>
+
+   <td><img src="image/<?PHP echo $row['photo']; ?>" alt=""></td>	</tr>
+<td><form method="POST" action="supprimerPro.php">
 	<input type="submit" name="supprimer" class="btn btn-primary mt-1 mb-0" value="supprimer">
-	<input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
+	<input type="hidden" value="<?PHP echo $row['referance']; ?>" name="referance">
 	</form>
 	</td>
 	
 <td>
-	<a href="modifierpromotion.php?id=<?PHP echo $row['id']; ?>"><button type="submit" class="btn btn-primary mt-1 mb-0" >Modifier</button></a>
+	<a href="modifierpromotion.php?id=<?PHP echo $row['referance']; ?>"><button type="submit" class="btn btn-primary mt-1 mb-0" >Modifier</button></a>
 </td> 
 
 
